@@ -19,7 +19,7 @@ import {Button} from 'react-native-elements/dist/buttons/Button';
 import {launchImageLibrary} from 'react-native-image-picker';
 import Moment from 'moment';
 
-const AddMovie = ({closeModel}) => {
+const AddMovie = ({closeModel, setMyMovies, myMovie}) => {
   const [movieName, onChangeMovieName] = React.useState();
   const [movieOverview, onChangeMovieOverview] = React.useState();
   const [movieDate, onChangeMovieDate] = React.useState(new Date());
@@ -55,14 +55,16 @@ const AddMovie = ({closeModel}) => {
     if (fileUri) {
       console.log(fileUri);
     }
+
     let movie = {
       poster_path: fileUri,
       original_title: movieName,
       overview: movieOverview,
       release_date: Moment(movieDate).format('yyyy-MM-DD'), //2021-12-15
     };
-    console.log(movie);
-    //closeModel();
+    setMyMovies([...myMovie, movie]);
+    console.log(myMovie);
+    closeModel();
   };
 
   chooseImage = () => {

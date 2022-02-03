@@ -8,16 +8,8 @@ import MovieCarousel from '../component/movie/movie-carousel';
 import AddMovie from '../component/movie/addMovie';
 
 const HomeScreen = ({navigation}) => {
-  const myMovie = [
-    {
-      original_title: 'Wahied',
-      overview: 'Assad ddsdada',
-      poster_path:
-        'file:///Users/wahied/Library/Developer/CoreSimulator/Devices/75CCE504-D6A7-4684-92A8-74A8142C00A3/data/Containers/Data/Application/FEAB4F41-470B-42AA-B719-2D23A9E0671B/tmp/08C205C3-59DB-4343-8BDA-851CCDB2CABA.jpg',
-      release_date: '2022-02-03T02:25:26.310Z',
-    },
-  ];
-
+  const [myMovie, setMyMovie] = React.useState([]);
+  console.log(myMovie);
   const MyMovieList = () => {
     return myMovie.length !== 0 ? (
       <MovieCarousel
@@ -36,13 +28,18 @@ const HomeScreen = ({navigation}) => {
   };
 
   const [modelVisiable, setModelVisiable] = useState(false);
+
   return (
     <View style={styles.container}>
       <Modal
         transparent={false}
         visible={modelVisiable}
         onRequestClose={() => setModelVisiable(false)}>
-        <AddMovie closeModel={() => setModelVisiable(false)} />
+        <AddMovie
+          setMyMovies={data => setMyMovie(data)}
+          closeModel={() => setModelVisiable(false)}
+          myMovie={myMovie}
+        />
       </Modal>
 
       <View style={styles.containerTitle}>
