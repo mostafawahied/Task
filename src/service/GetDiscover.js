@@ -5,10 +5,8 @@ export function GetResponseDiscover(response) {
 }
 
 const GetDiscover = pageIndex => {
-  const url = new URL(
-    `${BASE_URL}/discover/movie?api_key=${API_KEY}&page=${pageIndex}`,
-  );
-  console.log(url.href);
+  const url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&page=${pageIndex}`;
+  console.log(url);
   return fetch(url)
     .then(response => response.json())
     .then(json => {

@@ -1,51 +1,55 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Text, ScrollView, Modal} from 'react-native';
+import {View, StyleSheet, Text, Modal} from 'react-native';
 import {TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import DiscoverCarousel from '../component/discover/discover-carousel';
 import MovieCarousel from '../component/movie/movie-carousel';
+import AddMovie from '../component/movie/addMovie';
 
 const HomeScreen = ({navigation}) => {
   const myMovie = [
     {
-      adult: false,
-      backdrop_path: '/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg',
-      genre_ids: [28, 12, 878],
-      id: 63432649,
-      original_language: 'en',
-      original_title: 'Spider-Man: No Way Home',
-      overview:
-        'Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.',
-      popularity: 27352.884,
-      poster_path: '/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
-      release_date: '2021-12-15',
-      title: 'Spider-Man: No Way Home',
-      video: false,
-      vote_average: 8.4,
-      vote_count: 6580,
+      original_title: 'Wahied',
+      overview: 'Assad ddsdada',
+      poster_path:
+        'file:///Users/wahied/Library/Developer/CoreSimulator/Devices/75CCE504-D6A7-4684-92A8-74A8142C00A3/data/Containers/Data/Application/FEAB4F41-470B-42AA-B719-2D23A9E0671B/tmp/08C205C3-59DB-4343-8BDA-851CCDB2CABA.jpg',
+      release_date: '2022-02-03T02:25:26.310Z',
     },
   ];
+
+  const MyMovieList = () => {
+    return myMovie.length !== 0 ? (
+      <MovieCarousel
+        movies={myMovie}
+        loading={true}
+        local={true}
+        navigateToMovie={data =>
+          navigation.navigate('MovieDetail', {movie: data})
+        }
+      />
+    ) : (
+      <View style={styles.noMovieContainer}>
+        <Text style={styles.title}>No movie added</Text>
+      </View>
+    );
+  };
+
   const [modelVisiable, setModelVisiable] = useState(false);
   return (
-    <ScrollView style={styles.container}>
-      {/* <Modal
-        animationType={'slide'}
+    <View style={styles.container}>
+      <Modal
         transparent={false}
-        visible={modelVisiable}>
-        <Text
-          style={styles.closeText}
-          onPress={() => {
-            setModelVisiable(false);
-          }}>
-          Close Modal
-        </Text>
+        visible={modelVisiable}
+        onRequestClose={() => setModelVisiable(false)}>
+        <AddMovie closeModel={() => setModelVisiable(false)} />
       </Modal>
+
       <View style={styles.containerTitle}>
         <Text style={styles.title}>My Movies</Text>
         <TouchableOpacity onPress={() => setModelVisiable(true)}>
           <Icon
-            name="add"
+            name="add-circle-outline"
             size={25}
             color="#90cea1"
             // eslint-disable-next-line react-native/no-inline-styles
@@ -53,13 +57,7 @@ const HomeScreen = ({navigation}) => {
           />
         </TouchableOpacity>
       </View>
-      <MovieCarousel
-        movies={myMovie}
-        loading={true}
-        navigateToMovie={data =>
-          navigation.navigate('MovieDetail', {movie: data})
-        }
-      /> */}
+      <MyMovieList />
       <View style={styles.containerTitle}>
         <Text style={styles.title}>All Movies</Text>
       </View>
@@ -68,7 +66,7 @@ const HomeScreen = ({navigation}) => {
           navigation.navigate('MovieDetail', {movie: data})
         }
       />
-    </ScrollView>
+    </View>
   );
 };
 
@@ -88,6 +86,7 @@ const styles = StyleSheet.create({
   containerTitle: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     width: '100%',
   },
   title: {
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  button: {
+  addButton: {
     display: 'flex',
     height: 60,
     borderRadius: 6,
@@ -122,6 +121,8 @@ const styles = StyleSheet.create({
       width: 0,
     },
     shadowRadius: 25,
+
+    paddingHorizontal: 20,
   },
   closeButton: {
     display: 'flex',
@@ -129,14 +130,16 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FF3974',
-    shadowColor: '#2AC062',
+    width: '100%',
+    backgroundColor: '#0d253f',
+    shadowColor: '#0d253f',
     shadowOpacity: 0.5,
     shadowOffset: {
       height: 10,
       width: 0,
     },
     shadowRadius: 25,
+    paddingHorizontal: 20,
   },
   buttonText: {
     color: '#FFFFFF',
@@ -156,6 +159,21 @@ const styles = StyleSheet.create({
   closeText: {
     fontSize: 24,
     color: '#00479e',
-    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  space: {
+    width: 20, // or whatever size you need
+    height: 20,
+  },
+  noMovieContainer: {
+    flex: 0.2,
+    backgroundColor: '#000',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+    paddingTop: 30,
+    overflow: 'hidden',
+    maxWidth: '100%',
   },
 });

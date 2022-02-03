@@ -10,13 +10,7 @@ import GlobalContextProvider from './context/global';
 
 import {LogBox} from 'react-native';
 
-LogBox.ignoreLogs([
-  "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
-  'RCTBridge required dispatch_sync to load RNGestureHandlerModule. This may lead to deadlocks',
-  'VirtualizedLists should never be nested inside plain',
-  'Encountered two children with',
-]);
-
+LogBox.ignoreAllLogs();
 const Stack = createStackNavigator();
 const App = ({navigation}) => {
   return (

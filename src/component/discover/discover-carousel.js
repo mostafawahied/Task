@@ -9,31 +9,20 @@ import MovieCarousel from '../movie/movie-carousel';
 
 const DiscoverCarousel = ({navigateToMovie}) => {
   const [movies, setMovies] = useState([]);
-  const [page, SetPage] = useState();
+  const [page, SetPage] = useState(1);
 
   useEffect(() => {
-    getData(1);
-  }, []);
-
-  const getData = from => {
-    GetDiscover(from).then(res => {
+    GetDiscover(page).then(res => {
       setMovies(prevMovies => [...prevMovies, ...res.results]);
-      // SetPage(res.page);
     });
-  };
+  }, [page]);
+
   return movies.length ? (
     <MovieCarousel
       movies={movies}
       navigateToMovie={navigateToMovie}
       page={page}
-      SetPage={() => {
-        console.log('reach ended', page);
-        if (page !== undefined) {
-          SetPage(prevPage => (prevPage ? prevPage : 1) + 1);
-          console.log('reach ended', movies.length);
-          getData((page ? page : 1) + 1);
-        }
-      }}
+      SetPage={() => SetPage(prevPage => prevPage + 1)}
     />
   ) : (
     <View

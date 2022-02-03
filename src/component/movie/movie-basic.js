@@ -6,7 +6,7 @@ import ImageLoad from 'react-native-image-placeholder';
 
 import {IMAGE_PATH} from '../../utilities/constant';
 
-const MovieBasicCard = ({movie, navigateToMovie}) => {
+const MovieBasicCard = ({movie, navigateToMovie, local = false}) => {
   return (
     <View style={styles.card}>
       <ImageLoad
@@ -14,7 +14,9 @@ const MovieBasicCard = ({movie, navigateToMovie}) => {
         // placeholderSource={{
         //   uri: 'https://www.beelights.gr/assets/images/empty-image.png',
         // }}
-        source={{uri: IMAGE_PATH + movie.poster_path}}
+        source={{
+          uri: local ? movie.poster_path : IMAGE_PATH + movie.poster_path,
+        }}
         placeholderStyle={styles.image}
       />
       <View
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 220,
-    height: 150,
+    height: 220,
     backgroundColor: 'gray',
   },
   text: {

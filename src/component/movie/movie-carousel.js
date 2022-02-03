@@ -13,6 +13,7 @@ import MovieBasicCard from './movie-basic';
 const MovieCarousel = ({
   movies = [],
   loading = false,
+  local = false,
   navigateToMovie,
   page,
   SetPage,
@@ -28,8 +29,10 @@ const MovieCarousel = ({
     <View style={styles.container}>
       <FlatList
         data={movies}
+        horizontal={true}
+        ListEmptyComponent={handleEmpty}
+        handleEmpty={handleEmpty}
         onEndReached={SetPage}
-        ListEmptyComponent={handleEmpty()}
         onEndReachedThreshold={0.3}
         ListFooterComponent={() =>
           movies.length > 8 ? (
@@ -42,6 +45,7 @@ const MovieCarousel = ({
           return (
             <MovieBasicCard
               movie={item}
+              local={local}
               key={item.id}
               navigateToMovie={navigateToMovie}
             />
