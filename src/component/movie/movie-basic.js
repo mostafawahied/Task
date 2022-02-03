@@ -1,13 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import ImageLoad from 'react-native-image-placeholder';
 
 import {IMAGE_PATH} from '../../utilities/constant';
 
 const MovieBasicCard = ({movie, navigateToMovie, local = false}) => {
-  const image = require('../../assets/empty-image.png');
   return (
     <View style={styles.card}>
       <ImageLoad

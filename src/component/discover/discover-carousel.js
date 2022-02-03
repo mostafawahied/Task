@@ -22,6 +22,7 @@ const DiscoverCarousel = ({navigateToMovie}) => {
       movies={movies}
       navigateToMovie={navigateToMovie}
       page={page}
+      local={false}
       SetPage={() => SetPage(prevPage => prevPage + 1)}
     />
   ) : (

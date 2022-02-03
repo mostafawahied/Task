@@ -9,7 +9,6 @@ import AddMovie from '../component/movie/addMovie';
 
 const HomeScreen = ({navigation}) => {
   const [myMovie, setMyMovie] = React.useState([]);
-  console.log(myMovie);
   const MyMovieList = () => {
     return myMovie.length !== 0 ? (
       <MovieCarousel
@@ -17,7 +16,7 @@ const HomeScreen = ({navigation}) => {
         loading={true}
         local={true}
         navigateToMovie={data =>
-          navigation.navigate('MovieDetail', {movie: data})
+          navigation.navigate('MovieDetail', {movie: data, local: true})
         }
       />
     ) : (

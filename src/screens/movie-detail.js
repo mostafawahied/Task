@@ -9,21 +9,24 @@ import {GlobalContext} from '../context/global';
 
 const MovieDetail = ({navigation, route}) => {
   const {genders} = useContext(GlobalContext);
-
+  const {local} = route.params;
   const genderName = (genderList = []) =>
     genders
       .filter(gender => genderList.includes(gender.id))
       .map(gender => gender.name)
       .slice(0, 2)
       .join('/ ');
-
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
         <View style={{position: 'relative', marginLeft: -30}}>
           <ImageLoad
             style={styles.image}
-            source={{uri: IMAGE_PATH + route.params.movie.poster_path}}
+            source={{
+              uri: local
+                ? route.params.movie.poster_path
+                : IMAGE_PATH + route.params.movie.poster_path,
+            }}
             placeholderStyle={styles.image}
           />
         </View>
